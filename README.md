@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 README
 ================
 
@@ -97,8 +96,3 @@ for information on data sharing agreements.
 
 For questions regarding this repository or the manuscript please contact
 [chelsea.hansen@nih.gov](chelsea.hansen@nih.gov)
-=======
-This work was done in collaboration with Public Health - Seattle & King County as part of a CSTE/CDC - supported initiative, "Development of forecast, analytic, and visualization tools to improve outbreak response and support public health decision making."
-
-Please see documentation for our R Package [R.Scenario.Vax](https://chelsea-hansen.github.io/R.Scenario.Vax/) For more information regarding the model structure.
->>>>>>> 4c93fda373d77dbb9ddbc179d0cf0281f2bd900b
