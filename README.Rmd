@@ -18,7 +18,7 @@ We used RSV hospitalization data for the greater Seattle area from two sources:
 Immunization data was obtained from [Washington State Immunization Information System](https://doh.wa.gov/public-health-provider-resources/healthcare-professions-and-facilities/data-exchange/immunization-information-system)
 
 **Note:** Raw data are not publicly available. Aggregated datasets have been provided here to reproduce our study results. Researchers wishing to access Washington’s syndromic surveillance data should contact [RHINO@doh.wa.gov](RHINO@doh.wa.gov). 
-Researchers wishing to access aggregate data from Seattle Children’s Hospital should contact [amanda.adler@seattlechildrens.org](amanda.adler@seattlechildrens.org) for information on data sharing agreements. Researchers wishing to access data from Washington's Immunization Information system from  should contact [WAIISDataRequests@doh.wa.gov](WAIISDataRequests@doh.wa.gov).
+Researchers wishing to access aggregate data from Seattle Children’s Hospital should contact [amanda.adler@seattlechildrens.org](amanda.adler@seattlechildrens.org) for information on data sharing agreements. Researchers wishing to access data from Washington's Immunization Information System from  should contact [WAIISDataRequests@doh.wa.gov](WAIISDataRequests@doh.wa.gov).
 
 ## Data
 

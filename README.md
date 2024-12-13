@@ -35,7 +35,7 @@ to access Washington’s syndromic surveillance data should contact
 aggregate data from Seattle Children’s Hospital should contact
 [amanda.adler@seattlechildrens.org](amanda.adler@seattlechildrens.org)
 for information on data sharing agreements. Researchers wishing to
-access data from Washington’s Immunization Information system from
+access data from Washington’s Immunization Information System from
 should contact
 [WAIISDataRequests@doh.wa.gov](WAIISDataRequests@doh.wa.gov).
 
