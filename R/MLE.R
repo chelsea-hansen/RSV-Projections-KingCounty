@@ -267,7 +267,7 @@ fitpand <-  function(parameters,dat) {
   npi1 <- 1 / (1 + exp(-parameters[1]))  
   npi2 <- 1 / (1 + exp(-parameters[2])) 
   npi3 <- 1 / (1 + exp(-parameters[3])) 
-  #npi4 <- 1 / (1 + exp(-parameters[4])) 
+ 
  
   introductions = data.frame(intros=c(rep(parmset$seed,248),rep(0,44),rep(NA,24),rep(parmset$seed,152))) %>% 
     mutate(intros = na_interpolation(intros, method="linear"))
@@ -415,7 +415,6 @@ for (t in 1:t0){
 
 hosp1 <- c(report_infants, report_infants*0.59, report_infants*0.33, report_infants*0.2, report_infants*0.15, report_infants*0.15, rep(report_children, 2), rep(.001, 6))
 hosp2 <- hosp1 * 0.4
-
 hosp3 <- c(rep(0.001, 8), rep(report_adults, 4), report_seniors60, report_seniors75)
 
 H1 <- matrix(0, nrow = t0, ncol = al)
@@ -454,24 +453,29 @@ plotA = ggplot()+
   scale_color_manual(name=NULL, values=c("black","grey40","blue"))+
   scale_y_continuous(name="RSV Hospitalization Rate",sec.axis = sec_axis( trans=~.*10, name="% of Contacts"))
 plotA
-ggsave(plot=plotA,"FIGURES/eFigure6.png",height=5,width=9,units="in")
-
-
 
 
 # Add noise to fitted parameters and resample -----------------------------
 
 parms = c(baseline.txn.rate,b1,phi, report_seniors60,report_seniors75,report_infants,report_children,report_adults,npi1, npi2, npi3)
-
+parms
 conf_int = cbind(parms*.9,parms*1.1)
-#Less noise for Phi parameter which is more sensitive to small changes 
-conf_int[3,2] = phi*1.025
-conf_int[3,1] = phi*0.975
+#Less noise for Phi parameter which is more sensitive to small changes (23-24 season)
+conf_int[3,2] = phi
+conf_int[3,1] = phi*0.967 #fix between pre-pandemic and 22-23 season
 conf_int
 
 
+conf_int2 = cbind(parms*.9,parms*1.1)
+#Less noise for Phi parameter which is more sensitive to small changes (24-25 season)
+conf_int2[3,2] = phi
+conf_int2[3,1] = phi*0.976 #fix between pre-pandemic and 23-24 season
+conf_int2
+
+seed(123)
 h=100
 lhs<-maximinLHS(h,11)
+
 new_parms <- cbind(
   beta = lhs[,1]*(conf_int[1,2]-conf_int[1,1])+conf_int[1,1],
   b1 = lhs[,2]*(conf_int[2,2]-conf_int[2,1])+conf_int[2,1],
@@ -484,24 +488,22 @@ new_parms <- cbind(
   npi1 = lhs[,9]*(conf_int[9,2]-conf_int[8,1])+conf_int[9,1],
   npi2 = lhs[,10]*(conf_int[10,2]-conf_int[9,1])+conf_int[10,1],
   npi3 = lhs[,11]*(conf_int[11,2]-conf_int[10,1])+conf_int[11,1])
- 
-saveRDS(new_parms,"DATA/fitted_parameters_100.rds")
+
+saveRDS(new_parms,"DATA/fitted_parameters_100_2023_24.rds")
 
 
-h=1000
-lhs<-maximinLHS(h,11)
-new_parms <- cbind(
+new_parms2 <- cbind(
   beta = lhs[,1]*(conf_int[1,2]-conf_int[1,1])+conf_int[1,1],
   b1 = lhs[,2]*(conf_int[2,2]-conf_int[2,1])+conf_int[2,1],
-  phi = lhs[,3]*(conf_int[3,2]-conf_int[3,1])+conf_int[3,1],
+  phi = lhs[,3]*(conf_int2[3,2]-conf_int2[3,1])+conf_int2[3,1], #swap out phi values
   RS60 = lhs[,4]*(conf_int[4,2]-conf_int[4,1])+conf_int[4,1],
-  RS75 = lhs[,4]*(conf_int[5,2]-conf_int[5,1])+conf_int[5,1],
-  RI = lhs[,4]*(conf_int[6,2]-conf_int[6,1])+conf_int[6,1],
-  RC = lhs[,5]*(conf_int[7,2]-conf_int[7,1])+conf_int[7,1],
-  RA = lhs[,6]*(conf_int[8,2]-conf_int[8,1])+conf_int[8,1],
-  npi1 = lhs[,6]*(conf_int[9,2]-conf_int[8,1])+conf_int[9,1],
-  npi2 = lhs[,6]*(conf_int[10,2]-conf_int[9,1])+conf_int[10,1],
-  npi3 = lhs[,6]*(conf_int[11,2]-conf_int[10,1])+conf_int[11,1])
+  RS75 = lhs[,5]*(conf_int[5,2]-conf_int[5,1])+conf_int[5,1],
+  RI = lhs[,6]*(conf_int[6,2]-conf_int[6,1])+conf_int[6,1],
+  RC = lhs[,7]*(conf_int[7,2]-conf_int[7,1])+conf_int[7,1],
+  RA = lhs[,8]*(conf_int[8,2]-conf_int[8,1])+conf_int[8,1],
+  npi1 = lhs[,9]*(conf_int[9,2]-conf_int[8,1])+conf_int[9,1],
+  npi2 = lhs[,10]*(conf_int[10,2]-conf_int[9,1])+conf_int[10,1],
+  npi3 = lhs[,11]*(conf_int[11,2]-conf_int[10,1])+conf_int[11,1])
 
-saveRDS(new_parms,"DATA/fitted_parameters_1000.rds")
+saveRDS(new_parms2,"DATA/fitted_parameters_100_2024_25.rds")
 

@@ -20,12 +20,12 @@ yinit.vector=data[[3]]
 
 
 #add shared parameters 
-fitted_params = readRDS("DATA/fitted_parameters_100.rds")
+fitted_params = readRDS("DATA/fitted_parameters_100_2023_24.rds")
 
 fit_times = seq(1, length(dates1)+104,by=1)
 
 # observed data 
-time_series = readRDS("DATA/time_series.rds") %>% 
+time_series = readRDS("DATA/time_series_public.rds") %>% 
   mutate(rsv_rate = hosp_rate/100000*2267000)
 
 
@@ -93,6 +93,7 @@ observed_main = projection_function(RRHn1 = 0.01,
                                     fit_times = fit_times) %>% 
   mutate(scenario = "observed_main")
 
+#quick look at projections
 ggplot(data=observed_main %>% filter(Age=="All") %>% mutate(date=as.Date(date)))+
   geom_line(aes(x=date, y=value, group=sample))
 
@@ -107,7 +108,6 @@ counter_monoclonal_birth =  rep(0, length(dates1) + 104)
 counter_maternal_vax <- rep(0, length(dates1) + 104)
 counter_senior_vax75 <- rep(0, length(dates1) + 104)
 counter_senior_vax60 <- rep(0, length(dates1) + 104)
-
 
 counterfactual = projection_function(RRHn1 = 0.01,
                                      RRHn2 = 0.01,
@@ -137,12 +137,10 @@ counterfactual = projection_function(RRHn1 = 0.01,
                                      fit_times = fit_times) %>% 
   mutate(scenario = "counterfactual")
 
+#quick look at results
 ggplot(data=counterfactual %>% filter(Age=="All") %>% mutate(date=as.Date(date)))+
   geom_line(aes(x=date, y=value, group=sample))
 
-
-results = rbind(observed_main, counterfactual)
-saveRDS(results,"RESULTS/results 100 23-24 check.rds")
 # Monoclonal_only ---------------------------------------------------------
 monoclonal_only = projection_function(RRHn1 = 0.01,
                                     RRHn2 = 0.01,
@@ -204,6 +202,7 @@ maternal_only = projection_function(RRHn1 = 0.01,
 
 results = rbind(observed_main,counterfactual,
                 monoclonal_only, maternal_only)
+
 table(results$scenario)
 saveRDS(results,"RESULTS/results_23-24_100replicates.rds")
 

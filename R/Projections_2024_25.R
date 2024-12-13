@@ -19,7 +19,7 @@ yinit=data[[2]]
 yinit.vector=data[[3]]
 
 #add shared parameters 
-fitted_params = readRDS("DATA/fitted_parameters_100.rds")
+fitted_params = readRDS("DATA/fitted_parameters_100_2024_25.rds")
 
 fit_times = seq(1, length(dates2)+104,by=1)
 
@@ -62,7 +62,7 @@ counter_senior_vax75 <- rep(0, length(dates2) + 104)
 counter_senior_vax60 <- rep(0, length(dates2) + 104)
 
 
-#Optimistic 
+#Optimistic immunization coverage
 opt_sen_75 = c(rep(0, length(dates2) + 104-41),cum_sen_75*.87,immu2$week_seniors_75*.87,rep(0,4))
 opt_sen_60_74 = c(rep(0, length(dates2) + 104-41),cum_sen_60*.8,immu2$week_seniors_60_74*.8,rep(0,4))
 opt_maternal_vax = c(rep(0, length(dates2) + 104-40),immu2$scale_mat*4800,rep(0,4))
@@ -73,7 +73,7 @@ opt_monoclonal_45 = c(rep(0, length(dates2) + 104-40),immu2$scale_catchup*10200*
 opt_monoclonal_67 = c(rep(0, length(dates2) + 104-40),immu2$scale_catchup*10200*.25,rep(0,4))
 
 
-#Pessimistic 
+#Pessimistic immunization coverage
 pes_sen_75 = c(rep(0, length(dates2) + 104-41),cum_sen_75*.87,immu2$week_seniors_75*.87*.5,rep(0,4))
 pes_sen_60_74 = c(rep(0, length(dates2) + 104-41),cum_sen_60*.8,immu2$week_seniors_60_74*.8*.5,rep(0,4))
 pes_maternal_vax = c(rep(0, length(dates2) + 104-40),immu2$scale_mat*3200,rep(0,4))
@@ -119,9 +119,7 @@ ggplot(data=counterfactual %>% filter(Age=="All") %>% mutate(date=as.Date(date))
   geom_line(aes(x=date, y=value, group=sample))
 
 
-
 # ScenarioD ---------------------------------------------------------------
-
 
 scenarioD = projection_function(RRHn1 = 0.01,
                                      RRHn2 = 0.01,
@@ -798,5 +796,7 @@ results  = rbind(counterfactual, scenarioA, scenarioB, scenarioC,scenarioD,
                  waning_optimistic, waning_pessimistic,
                  txn_optimistic, txn_pessimistic, 
                  waning_txn_optimistic, waning_txn_pessimistic)
+table(results$scenario)
+
 saveRDS(results, "RESULTS/results_24-25_100replicates.rds")
 
