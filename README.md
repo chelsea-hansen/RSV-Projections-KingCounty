@@ -1,7 +1,7 @@
 README
 ================
 
-#### Scenario projections of RSV hospitalizations averted due to new immunizations in King County, Washington, October 2023 to May 2025
+#### Scenario projections of RSV hospitalizations averted due to new immunization programs in King County, Washington, October 2023 to May 2025
 
 This work was done in collaboration with Public Health - Seattle & King
 County as part of a CSTE/CDC - supported initiative, “Development of
@@ -24,13 +24,20 @@ sources:
     Children’s Hospital](https://www.seattlechildrens.org/) for the same
     period.
 
+Immunization data was obtained from [Washington State Immunization
+Information
+System](https://doh.wa.gov/public-health-provider-resources/healthcare-professions-and-facilities/data-exchange/immunization-information-system)
+
 **Note:** Raw data are not publicly available. Aggregated datasets have
 been provided here to reproduce our study results. Researchers wishing
 to access Washington’s syndromic surveillance data should contact
 [RHINO@doh.wa.gov](RHINO@doh.wa.gov). Researchers wishing to access
 aggregate data from Seattle Children’s Hospital should contact
 [amanda.adler@seattlechildrens.org](amanda.adler@seattlechildrens.org)
-for information on data sharing agreements.
+for information on data sharing agreements. Researchers wishing to
+access data from Washington’s Immunization Information system from
+should contact
+[WAIISDataRequests@doh.wa.gov](WAIISDataRequests@doh.wa.gov).
 
 ## Data
 
@@ -43,8 +50,8 @@ for information on data sharing agreements.
   information, see the eMethods from the corresponding manuscript.
 - `age_distribution_public.rds`: Age distribution of RSV
   hospitalizations in King County, WA.
-- `weekly_immunizations_public.rds`: Estimated weekly and cumulative
-  immunization coverage for:
+- `weekly_immunizations_public.rds`: (Not currently posted) Estimated
+  weekly and cumulative immunization coverage for:
   - Infants born to vaccinated mothers.
   - Infants receiving birth doses of nirsevimab.
   - Infants receiving catch-up doses of nirsevimab.
@@ -65,9 +72,14 @@ for information on data sharing agreements.
   estimation (`R/MLE.R`).
 - `fitted_parameters_part2.rds`: Fitted parameters for contact
   reductions during the COVID-19 period (see eMethods).
-- `fitted_parameters_100.rds`: 100 parameter sets based on Latin
-  Hypercube Sampling from the upper and lower bounds of the fitted
-  parameter values (after adding noise). See eMethods.
+- `fitted_parameters_100_2023_24.rds`: 100 parameter sets for the
+  2023-24 season based on Latin Hypercube Sampling from the upper and
+  lower bounds of the fitted parameter values (after adding noise, see
+  eMethods).
+- `fitted_parameters_100_2024_25.rds`: 100 parameter sets for the
+  2024-25 season based on Latin Hypercube Sampling from the upper and
+  lower bounds of the fitted parameter values (after adding noise, see
+  eMethods).
 
 ## R
 
