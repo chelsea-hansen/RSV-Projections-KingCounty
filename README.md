@@ -8,7 +8,9 @@ County as part of a CSTE/CDC - supported initiative, “Development of
 forecast, analytic, and visualization tools to improve outbreak response
 and support public health decision making.”
 
-Please see our manuscript and documentation for our R Package
+Please see our
+[Pre-print](https://www.medrxiv.org/content/10.1101/2024.12.13.24319008v1)
+and documentation for our R Package
 [R.Scenario.Vax](https://chelsea-hansen.github.io/R.Scenario.Vax/) For
 more information regarding the model structure.
 

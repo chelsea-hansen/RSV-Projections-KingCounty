@@ -8,7 +8,7 @@ output: github_document
 
 This work was done in collaboration with Public Health - Seattle & King County as part of a CSTE/CDC - supported initiative, "Development of forecast, analytic, and visualization tools to improve outbreak response and support public health decision making."
 
-Please see our manuscript and documentation for our R Package [R.Scenario.Vax](https://chelsea-hansen.github.io/R.Scenario.Vax/) For more information regarding the model structure.
+Please see our [Pre-print](https://www.medrxiv.org/content/10.1101/2024.12.13.24319008v1) and documentation for our R Package [R.Scenario.Vax](https://chelsea-hansen.github.io/R.Scenario.Vax/) For more information regarding the model structure.
 
 We used RSV hospitalization data for the greater Seattle area from two sources:
 
