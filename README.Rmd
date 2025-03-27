@@ -26,7 +26,7 @@ Researchers wishing to access aggregate data from Seattle Children’s Hospital 
 
 - `time_series_public.rds`: Time series of weekly RSV hospitalization rate per 100,000 population in King County, WA. These data have been adjusted to account for changes in RSV testing during the COVID-19 pandemic, and a 3-week moving average has been applied. For more information, see the eMethods from the corresponding manuscript.
 - `age_distribution_public.rds`: Age distribution of RSV hospitalizations in King County, WA.
-- `weekly_immunizations_public.rds`: (Not currently posted) Estimated weekly and cumulative immunization coverage for:
+- `weekly_immunizations_public.rds`:Estimated weekly and cumulative immunization coverage for:
   - Infants born to vaccinated mothers.
   - Infants receiving birth doses of nirsevimab.
   - Infants receiving catch-up doses of nirsevimab.
@@ -35,11 +35,7 @@ Researchers wishing to access aggregate data from Seattle Children’s Hospital 
   - `[[1]]`: Fixed parameter values (see eTable 2 of the manuscript for full list).
   - `[[2]]`: Starting values for model compartments, based on publicly available age-stratified census data (vector form).
   - `[[3]]`: Starting values for model compartments, based on publicly available age-stratified census data (matrix form).
-- `fitted_paramaters_part1.rds`: Fitted parameter values for the baseline transmission rate, timing and amplitude of seasonal forcing, and age-specific reporting rates for RSV hospitalizations, fit to data from 2017 to 2020. These values are fitted using maximum likelihood estimation (`R/MLE.R`).
-- `fitted_parameters_part2.rds`: Fitted parameters for contact reductions during the COVID-19 period (see eMethods).
-- `fitted_parameters_100_2023_24.rds`: 100 parameter sets for the 2023-24 season based on Latin Hypercube Sampling from the upper and lower bounds of the fitted parameter values (after adding noise, see eMethods). 
-- `fitted_parameters_100_2024_25.rds`: 100 parameter sets for the 2024-25 season based on Latin Hypercube Sampling from the upper and lower bounds of the fitted parameter values (after adding noise, see eMethods). 
-
+- `fitted_paramaters.rds`: Fitted parameter values for 100 model trajectories (saved from MLE code).
 
 ## R 
 
@@ -59,4 +55,4 @@ Researchers wishing to access aggregate data from Seattle Children’s Hospital 
 - `results_24-25_100replicates`: Scenario projections for the 2024–2025 RSV season.
 
 #### Contact 
-For questions regarding this repository or the manuscript please contact [chelsea.hansen@nih.gov](chelsea.hansen@nih.gov)
+For questions regarding this repository or the manuscript please contact [chelseah@ruc.dk](chelseah@ruc.dk)
