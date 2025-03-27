@@ -20,7 +20,22 @@ yinit.vector=data[[3]]
 
 
 #add shared parameters 
-fitted_params = readRDS("DATA/fitted_parameters_100_2023_24.rds")
+fitted_params = data.frame(readRDS("DATA/fitted_parameters.rds"))
+transformations = fitted_params %>% 
+  mutate(beta = exp(beta),
+         b1 = exp(b1),
+         phi = (2*pi*(exp(phi))) / (1+exp(phi)),
+         RI = 1 / (1 + exp(-RI)),
+         RC = 1 / (1 + exp(-RC)),
+         RA = 1 / (1 + exp(-RA)),
+         RS60 = 1 / (1 + exp(-RS60)),
+         RS75 = 1 / (1 + exp(-RS75)),
+         npi1 = 1 / (1 + exp(-npi1)),
+         npi2 = 1 / (1 + exp(-npi2)),
+         npi3 = 1 / (1 + exp(-npi3)))
+transformations[] <- lapply(transformations, as.numeric)
+fitted_params = as.matrix(transformations)
+
 
 fit_times = seq(1, length(dates1)+104,by=1)
 

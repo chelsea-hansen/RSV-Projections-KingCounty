@@ -62,16 +62,15 @@ projection_function = function(RRHn1,
     npi1 <- lhs_parms[l,"npi1"]
     npi2 <- lhs_parms[l,"npi2"]
     npi3 <- lhs_parms[l,"npi3"]
-   # npi4 <- lhs_parms[l,"npi4"]
-    
-    introductions = data.frame(intros=c(rep(parmset$seed,248),rep(0,44),rep(NA,24),rep(parmset$seed,250))) %>% 
+  
+   
+    introductions = data.frame(intros=c(rep(parmset$seed,248),rep(0,44),rep(NA,24),rep(parmset$seed,350))) %>% 
       mutate(intros = na_interpolation(intros, method="linear"))
     parmset$introductions = introductions$intros
     
-    npi = data.frame(npis=c(rep(1,248),rep(npi1,52),rep(NA,22),rep(npi2,13),rep(npi3,18),rep(NA,13),rep(1,188)))%>% 
+    npi = data.frame(npis=c(rep(1,248),rep(npi1,52),rep(NA,22),rep(npi2,13),rep(npi3,26),rep(NA,13),rep(1,288)))%>% 
       mutate(npis= na_interpolation(npis, method="linear"))
     parmset$npi = npi$npis
-    
     
     
     
@@ -106,14 +105,14 @@ projection_function = function(RRHn1,
     Vs1<- St[,grep('Vs1', colnames(St))]
     Vs2<- St[,grep('Vs2', colnames(St))]
     
-    beta <-  parmset$baseline.txn.rate/(parmset$dur.days1/7)/(sum(yinit)^(1-parmset$q))*parmset$c2
-    
+    contact2 = parmset$npi[105:length( parmset$npi)]
+    intro2 = parmset$introductions[105:length( parmset$introductions)]  
     
     lambda1=matrix(0,nrow=t0,ncol=al)#Force of infection
     for (t in 1:t0){
-      lambda1[t,] <- as.vector((1+parmset$b1*cos(2*pi*(t-parmset$phi*52.1775)/52.1775))*((I1[t,]+parmset$rho1*I2[t,]+parmset$rho2*I3[t,]+parmset$rho2*I4[t,]+parmset$seed)%*%beta)/sum(St[t,]))}
+      beta <-  parmset$baseline.txn.rate/(parmset$dur.days1/7)/(sum(yinit)^(1-parmset$q))*parmset$c2*contact2[t]
+      lambda1[t,] <- as.vector((1+parmset$b1*cos(2*pi*(t-parmset$phi*52.1775)/52.1775))*((I1[t,]+parmset$rho1*I2[t,]+parmset$rho2*I3[t,]+parmset$rho2*I4[t,]+intro2[t])%*%beta)/sum(St[t,]))}
     
-   
     hosp1 <- c(report_infants,report_infants*.59,report_infants*.33,report_infants*.2,report_infants*.15,report_infants*.15,rep(report_children,2),rep(.001,6))
     hosp2 <- hosp1 * 0.4
     hosp3 <- c(rep(0.001, 8), rep(report_adults, 4),report_seniors60, report_seniors75)
